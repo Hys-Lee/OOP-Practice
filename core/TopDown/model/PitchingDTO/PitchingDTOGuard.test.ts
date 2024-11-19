@@ -7,10 +7,13 @@
  * 그렇다고 validator안에 PithcingDTO생성자를 넣기도 그렇고.
  */
 
-import PitchingDTOGuard from './PitchingDTOGuard';
+import {
+  TypePitchingDTOGuard,
+  IdentityNumberPitchingDTOGuard,
+} from './PitchingDTOGuard';
 
-describe('PitchingDTOGuard 테스트', () => {
-  const pg = new PitchingDTOGuard();
+describe('TypePitchingDTOGuard 테스트', () => {
+  const pg = new TypePitchingDTOGuard();
   test('validate 테스트 - Valid상황', () => {
     const input = [1, 2, 3];
     const result = pg.validate(input);
@@ -25,5 +28,20 @@ describe('PitchingDTOGuard 테스트', () => {
     const input = [1, NaN, 3];
     const result = pg.validate(input);
     expect(result).toBe(false);
+  });
+});
+
+describe('IdentityPitchingDTOGuard 테스트', () => {
+  test('validate 테스트 - Invalid한 상황 - 반복되는 값 존재', () => {
+    const validator = new IdentityNumberPitchingDTOGuard();
+    const input = [1, 1, 2, 3];
+    const result = validator.validate(input);
+    expect(result).toBe(false);
+  });
+  test('validate 테스트 - Valid한 상황 - 모두 유니크 값', () => {
+    const validator = new IdentityNumberPitchingDTOGuard();
+    const input = [1, 2, 3];
+    const result = validator.validate(input);
+    expect(result).toBe(true);
   });
 });

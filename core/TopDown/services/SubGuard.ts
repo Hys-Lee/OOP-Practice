@@ -32,4 +32,5 @@ class PhaseGuard implements SubGuard {
   }
 }
 
+export { SubGuard };
 export { TypeGuard, LenGuard, PhaseGuard };
