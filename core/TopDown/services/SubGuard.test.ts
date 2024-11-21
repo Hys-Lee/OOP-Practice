@@ -1,5 +1,7 @@
-import { LenGuard, TypeGuard } from './SubGuard';
+import { LenGuard, PhaseGuard, TypeGuard } from './SubGuard';
 import PitchingDTO from '../model/PitchingDTO/PithcingDTO';
+import DefaultGameConfigDTO from '../model/ConfigDTO/GameConfigDTO';
+import PitchingDTOFactory from '../model/PitchingDTO/PitchingDTOFactory';
 describe('TypeGuard 객체 테스트', () => {
   const tg = new TypeGuard();
   test('validate테스트 - PitchingDTO 타입 체크 - Valid 상황', () => {
@@ -8,16 +10,24 @@ describe('TypeGuard 객체 테스트', () => {
     const testResult = tg.validate(testPitchingDTO);
     expect(testResult).toEqual({ type: 'type', result: true });
   });
-  test('validate테스트 - PitchingDTO 타입 체크 - Valid 상황', () => {
-    const input = { a: 3, b: 4 };
-    // const testPitchingDTO = new PitchingDTO(input);
-  });
 });
 
 describe('LenGuard 객체 테스트', () => {
-  test('validate테스트 - 입력 길이 체크', () => {
-    const inputLen = 5;
-    const lg = new LenGuard(5);
+  const inputLen = 5;
+  const config = new DefaultGameConfigDTO(1, inputLen);
+  const lg = new LenGuard(config);
+  test('validate테스트 - VALID: 입력 길이 체크', () => {
+    const input = PitchingDTOFactory.createPitchingDTO([1, 2, 3, 4, 5]);
+    expect(lg.validate(input)).toEqual({ type: 'len', result: true });
+  });
+  test('validate테스트 - INVALID: 입력 길이 체크', () => {
+    const input = PitchingDTOFactory.createPitchingDTO([1, 2, 3, 4]);
+    expect(lg.validate(input)).toEqual({ type: 'len', result: false });
   });
 });
-describe('PhaseGuard 객체 테스트', () => {});
+
+describe('PhaseGuard 객체 테스트', () => {
+  const phase = 3;
+  const config = new DefaultGameConfigDTO(phase, 0);
+  const pg = new PhaseGuard(config);
+});

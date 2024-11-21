@@ -17,4 +17,4 @@ class DefaultGameConfigDTO {
   }
 }
 
-export default GameConfigDTO;
+export default DefaultGameConfigDTO;
