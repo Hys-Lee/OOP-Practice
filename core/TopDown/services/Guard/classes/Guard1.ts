@@ -1,12 +1,11 @@
-import GameConfigDTO from '../model/ConfigDTO/GameConfigDTO';
-import PitchingDTO from '../model/PitchingDTO/PithcingDTO';
-import { SubGuardResult } from './DataTypes';
-import { SubGuardForInput, SubGuardForNumber } from './SubGuard';
-import { GameErrorDTO } from '../model/ErrorDTO/ErrorDTO';
-
-interface Guard {
-  validate: (input: PitchingDTO, config: GameConfigDTO) => void;
-}
+import GameConfigDTO from '../../../model/ConfigDTO/GameConfigDTO';
+import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
+import { SubGuardResult } from '../../DataTypes';
+import {
+  SubGuardForInput,
+  SubGuardForNumber,
+} from '../../SubGuard/interfaces/SubGuard';
+import { GameErrorDTO } from '../../../model/ErrorDTO/ErrorDTO';
 
 class Guard1 {
   private _typeGuard: SubGuardForInput;
@@ -39,5 +38,4 @@ class Guard1 {
     }
   }
 }
-
-export { Guard, Guard1 };
+export default Guard1;

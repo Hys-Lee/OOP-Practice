@@ -18,3 +18,4 @@ class DefaultGameConfigDTO {
 }
 
 export default DefaultGameConfigDTO;
+export { GameConfigDTO };

@@ -1,6 +1,6 @@
-import PitchingDTO from '../model/PitchingDTO/PithcingDTO';
-import PitchingDTOFactory from '../model/PitchingDTO/PitchingDTOFactory';
-import { BallReferee, StrikeReferee } from './SubReferee';
+import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
+import BallReferee from '../classes/BallReferee';
+import StrikeReferee from '../classes/StrikeReferee';
 
 describe('strikeReferee테스트', () => {
   const sr = new StrikeReferee();
@@ -31,7 +31,7 @@ describe('ballReferee테스트', () => {
     expect(br.judge(input, answer)).toEqual(result);
   });
   test('1스트라이크 1볼 4개중', () => {
-    const input = new PitchingDTO([1, 3, 4, 2]);
+    const input = new PitchingDTO([1, 3, 5, 6]);
     const result = { type: 'ball', result: 1 };
     expect(br.judge(input, answer)).toEqual(result);
   });

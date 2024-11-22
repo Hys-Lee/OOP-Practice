@@ -1,7 +1,10 @@
-import { LenGuard, PhaseGuard, TypeGuard } from './SubGuard';
-import PitchingDTO from '../model/PitchingDTO/PithcingDTO';
-import DefaultGameConfigDTO from '../model/ConfigDTO/GameConfigDTO';
-import PitchingDTOFactory from '../model/PitchingDTO/PitchingDTOFactory';
+import LenGuard from '../classes/LenGuard';
+import PhaseGuard from '../classes/PhaseGuard';
+import TypeGuard from '../classes/TypeGuard';
+import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
+import DefaultGameConfigDTO from '../../../model/ConfigDTO/GameConfigDTO';
+import PitchingDTOFactory from '../../../model/PitchingDTO/PitchingDTOFactory';
+
 describe('TypeGuard 객체 테스트', () => {
   const tg = new TypeGuard();
   test('validate테스트 - PitchingDTO 타입 체크 - Valid 상황', () => {

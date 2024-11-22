@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "module": "ESNext", // 또는 "ES6"
+    "esModuleInterop": true // ES 모듈과 CommonJS 간의 호환성
+  }
+}
