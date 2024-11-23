@@ -1,4 +1,4 @@
-import GameConfigDTO from '../../../model/ConfigDTO/GameConfigDTO';
+import { GameConfigDTO } from '../../../model/ConfigDTO/GameConfigDTO';
 import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
 
 interface Guard {
