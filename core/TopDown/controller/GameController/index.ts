@@ -2,7 +2,9 @@
 // 외부에서 controller사용할 때는, 어떤 게임 넣을지 직접 안하고,
 //  메서드만 사용해서 실행시키기 위해.
 
-import DefaultGameConfigDTO from '../../model/ConfigDTO/GameConfigDTO';
+import DefaultGameConfigDTO, {
+  GameConfigDTO,
+} from '../../model/ConfigDTO/GameConfigDTO';
 import {
   IdentityNumberPitchingDTOGuard,
   TypePitchingDTOGuard,
@@ -21,7 +23,7 @@ import DefaultGameController from './classes/DefaultGameController';
 // 게임에 필요한 설정들
 
 const _makeConfig = () => {
-  const DEFAULT_PHASE = 3;
+  const DEFAULT_PHASE = 10;
   const DEFAULT_LEN = 3;
   const defaultNumberBaseballGameConfig = new DefaultGameConfigDTO(
     DEFAULT_PHASE,
@@ -64,6 +66,22 @@ const numberBaseballGame = _makeGame();
 
 // 컨트롤러 생성
 
-const gameController = new DefaultGameController(numberBaseballGame);
+const defaultGameController = new DefaultGameController(numberBaseballGame);
 
-export default gameController;
+const CustomConfigGameController = (config: GameConfigDTO) => {
+  const customConfig = new DefaultGameConfigDTO(config.phase, config.dataLen);
+  const guard = _makeGuard();
+  const referee = _makeReferee();
+  const answer = _makeAnswer(config.dataLen);
+  const customNumberBaseballGame = new NumberBaseballGame(
+    customConfig,
+    guard,
+    referee,
+    answer
+  );
+
+  return new DefaultGameController(customNumberBaseballGame);
+};
+
+export default defaultGameController;
+export { CustomConfigGameController };

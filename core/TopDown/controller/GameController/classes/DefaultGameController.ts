@@ -1,5 +1,5 @@
 import { GameConfigDTO } from '../../../model/ConfigDTO/GameConfigDTO';
-import { GameErrorDTO } from '../../../model/ErrorDTO/ErrorDTO';
+import { ErrorDTO, GameErrorDTO } from '../../../model/ErrorDTO/ErrorDTO';
 import GameResultDTO from '../../../model/Game/GameResultDTO';
 import PitchingDTOFactory from '../../../model/PitchingDTO/PitchingDTOFactory';
 import {
@@ -61,14 +61,15 @@ class DefaultGameController implements GameController {
 
     try {
       this.curPhase += 1;
-      if (this.curPhase == this.maxPhase) {
-        this.isEnd = true;
+
+      if (this.isEnd) {
+        throw new Error('게임이 끝났습니다.');
       }
-      // else if (this.curPhase > this.maxPhase) {
-      //   throw new Error('마지막 페이즈였습니다');
-      // }
 
       const gameResult = this.game.proceed(inputDTO, this.curPhase);
+      if (this.curPhase == this.maxPhase || gameResult.strike == 3) {
+        this.isEnd = true;
+      }
 
       return gameResult;
     } catch (error) {

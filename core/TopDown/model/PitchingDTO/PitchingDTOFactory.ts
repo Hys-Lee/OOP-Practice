@@ -12,7 +12,7 @@ class PitchingDTOFactory {
     identityGuard: PitchingDTOGuard
   ) {
     if (!typeGuard.validate(input)) {
-      throw new Error('DTO 생성 실패');
+      throw new Error('DTO 생성 실패 - number array 입력해주세요');
     }
 
     if (!identityGuard.validate(input)) {

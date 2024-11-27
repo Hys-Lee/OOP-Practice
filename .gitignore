@@ -1,3 +1,4 @@
 isolate-business-from-ui-example/
 core/node_modules/
 nodeEnv/node_modules/
+*.js

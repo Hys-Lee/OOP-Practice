@@ -1,21 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var view_1 = require("./src/interface/view");
-var view_2 = require("./src/interface/view");
-var Objects_1 = require("../core/Objects");
-var input_1 = require("./src/interface/input");
+var view_1 = require("./src/atFirst/view");
+var index_1 = require("../core/TopDown/controller/GameController/index");
+var atFirstOnLine = function () {
+    // const referee = new Referee();
+    // GREETING
+    // const game = new Game();
+    // inputHandler(line, game);
+    // Viewer(game);
+};
+var topDownOnLine = function (line) {
+    var gameController = index_1.default;
+    var convertInput = function (lineString) {
+        return lineString.split(' ').map(function (val) { return Number(val); });
+    };
+    var inputNumArray = convertInput(line);
+    var result = gameController.proceed(inputNumArray);
+    console.log('line에 대한result: ', line, result);
+};
 var readline = require('readline');
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
-// GREETING
-var game = new Objects_1.default();
-(0, view_2.startGame)();
+(0, view_1.startGame)();
 rl.on('line', function (line) {
     console.log('입력 종료야');
-    (0, input_1.default)(line, game);
-    (0, view_1.default)(game);
+    // atFirstOnLine()
+    topDownOnLine(line);
 });
 // rl.on('close', () => {
 //   //   Viewer(game);

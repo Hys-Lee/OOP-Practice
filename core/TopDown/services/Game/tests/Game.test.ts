@@ -1,4 +1,5 @@
 import { GameConfigDTO } from '../../../model/ConfigDTO/GameConfigDTO';
+import { GameErrorDTO } from '../../../model/ErrorDTO/ErrorDTO';
 import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
 import { Guard } from '../../Guard/interfaces/Guard';
 import { Referee } from '../../Referee/interfaces/Referee';
@@ -12,7 +13,7 @@ describe('Game 테스트', () => {
   test('validate틀리면 error throw하는지', () => {
     const MockGuard = jest.fn().mockImplementation(() => {
       return {
-        vadliate: () => ['phase', 'type'],
+        validate: () => ['phase', 'type'],
       };
     });
 
@@ -26,9 +27,18 @@ describe('Game 테스트', () => {
     const referee = new MockReferee() as Referee;
     const meaninglessPhase = 0;
     const g = new Game1(emptyConfig, guard, referee, emptyAnswer);
+    //에러 타입
     expect(() => {
       g.proceed(emptyInput, meaninglessPhase);
-    }).toThrow();
+    }).toThrow(GameErrorDTO);
+    //에러 내용
+    expect(() => {
+      g.proceed(emptyInput, meaninglessPhase);
+    }).toThrow(
+      expect.objectContaining({
+        reasons: expect.arrayContaining(['phase', 'type']),
+      })
+    );
   });
 
   test('judge체크', () => {

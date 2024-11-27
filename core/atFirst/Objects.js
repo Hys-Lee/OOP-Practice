@@ -232,6 +232,7 @@ var Game = /** @class */ (function () {
     };
     Game.prototype._judge = function () {
         console.log('this.input: ', this._input);
+        var logics = [];
         var headReferee = new HeadReferee(this._input, this.answer);
         var phaseResult = headReferee.result;
         var returnTemplate = { result: phaseResult, phase: this.phase };

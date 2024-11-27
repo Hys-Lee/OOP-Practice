@@ -19,6 +19,12 @@ describe('게임 컨트롤러 테스트', () => {
       getConfigPhase: () => 3,
     };
   });
+  const PerfectGame = jest.fn().mockImplementation(() => {
+    return {
+      proceed: () => ({ strike: 3, ball: 0 } as PitchingResult),
+      getConfigPhase: () => 10,
+    };
+  });
 
   test('proceed 테스트 - Invalid inputDTO변환', () => {
     const mockGame = new EmtpyGame();
@@ -27,10 +33,10 @@ describe('게임 컨트롤러 테스트', () => {
 
     expect(() => {
       gameController.proceed(['1', 2, 3]);
-    }).toThrow();
+    }).toThrow(expect.objectContaining({ message: '입력 값 에러' }));
     expect(() => {
       gameController.proceed([1, 1, 2]);
-    }).toThrow();
+    }).toThrow(expect.objectContaining({ message: '입력 값 에러' }));
   });
 
   test('proceed 테스트 - Valid inputDTO변환', () => {
@@ -49,8 +55,12 @@ describe('게임 컨트롤러 테스트', () => {
     });
     const mockGame = new ErrorGame();
     const gameController = new DefaultGameController(mockGame);
+    expect(() => gameController.proceed([1, 2, 3])).toThrow(GameErrorDTO);
     expect(() => gameController.proceed([1, 2, 3])).toThrow(
-      new GameErrorDTO(['임시 에러'], '부적절한 게임 입력')
+      expect.objectContaining({
+        reasons: ['임시 에러'],
+        message: '부적절한 게임 입력',
+      })
     );
   });
 
@@ -70,7 +80,7 @@ describe('게임 컨트롤러 테스트', () => {
   //     );
   //   });    =
 
-  test('proceed 테스트 - Valid proceed 반환', () => {
+  test('proceed 테스트 - Valid proceed 반환 : 일반', () => {
     const mockGame = new ThreePhaseGame();
 
     const gameController = new DefaultGameController(mockGame);
@@ -87,6 +97,21 @@ describe('게임 컨트롤러 테스트', () => {
       })
     );
   });
+  test('proceed 테스트 - Valid proceed 반환 : 성공', () => {
+    const mockGame = new PerfectGame();
+
+    const gameController = new DefaultGameController(mockGame);
+    let result = gameController.proceed([1, 2, 3]);
+
+    expect(result).toEqual(
+      new GameResultDTO({
+        leftPhase: 9,
+        isEnd: true,
+        pitchingResult: { strike: 3, ball: 0 } as PitchingResult,
+      })
+    );
+  });
+
   test('reboot 테스트 - 상태 초기화', () => {
     const mockGame = new ThreePhaseGame();
     const gameController = new DefaultGameController(mockGame);
