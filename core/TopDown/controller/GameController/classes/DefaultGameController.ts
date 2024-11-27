@@ -63,11 +63,12 @@ class DefaultGameController implements GameController {
       this.curPhase += 1;
       if (this.curPhase == this.maxPhase) {
         this.isEnd = true;
-      } else if (this.curPhase > this.maxPhase) {
-        throw new Error('마지막 페이즈였습니다');
       }
+      // else if (this.curPhase > this.maxPhase) {
+      //   throw new Error('마지막 페이즈였습니다');
+      // }
 
-      const gameResult = this.game.proceed(inputDTO);
+      const gameResult = this.game.proceed(inputDTO, this.curPhase);
 
       return gameResult;
     } catch (error) {

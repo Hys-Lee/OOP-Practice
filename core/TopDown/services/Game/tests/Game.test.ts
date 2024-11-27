@@ -24,12 +24,13 @@ describe('Game 테스트', () => {
 
     const guard = new MockGuard() as Guard;
     const referee = new MockReferee() as Referee;
-
+    const meaninglessPhase = 0;
     const g = new Game1(emptyConfig, guard, referee, emptyAnswer);
     expect(() => {
-      g.proceed(emptyInput);
+      g.proceed(emptyInput, meaninglessPhase);
     }).toThrow();
   });
+
   test('judge체크', () => {
     const MockGuard = jest.fn().mockImplementation(() => {
       return {
@@ -45,9 +46,9 @@ describe('Game 테스트', () => {
 
     const guard = new MockGuard() as Guard;
     const referee = new MockReferee() as Referee;
-
+    const meaninglessPhase = 0;
     const g = new Game1(emptyConfig, guard, referee, emptyAnswer);
     // console.log('guard, referee: ', guard.validate(), referee.judge());
-    expect(g.proceed(emptyInput)).toEqual(answer);
+    expect(g.proceed(emptyInput, meaninglessPhase)).toEqual(answer);
   });
 });

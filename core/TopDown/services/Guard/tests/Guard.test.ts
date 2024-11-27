@@ -37,30 +37,33 @@ const TypeGuard = jest.fn().mockImplementation((isInvalid) => {
 describe('Guard테스트', () => {
   const tmpInput = new PitchingDTO([1, 2, 3]);
   const tmpConfig = new DefaultGameConfigDTO(0, 0);
-  const tmpPhase = 0;
+
   test('모두 틀렸을 때', () => {
     const g = new Guard1(
       new TypeGuard(true),
       new LenGuard(true),
-      new PhaseGuard(true),
-      tmpPhase
+      new PhaseGuard(true)
     );
 
     const answer = ['len', 'type', 'phase'];
-
-    expect(g.validate(tmpInput, tmpConfig)).toEqual(
-      expect.arrayContaining(answer)
-    );
+    const meaninglessLen = 0;
+    const meaninglessPhase = 0;
+    expect(
+      g.validate(tmpInput, meaninglessLen, meaninglessPhase, meaninglessPhase)
+    ).toEqual(expect.arrayContaining(answer));
   });
 
   test('모두 괜찮을 때', () => {
     const g = new Guard1(
       new TypeGuard(false),
       new LenGuard(false),
-      new PhaseGuard(false),
-      tmpPhase
+      new PhaseGuard(false)
     );
     const answer = [];
-    expect(g.validate(tmpInput, tmpConfig)).toEqual(answer);
+    const meaninglessPhase = 0;
+    const meaninglessLen = 0;
+    expect(
+      g.validate(tmpInput, meaninglessLen, meaninglessPhase, meaninglessPhase)
+    ).toEqual(answer);
   });
 });

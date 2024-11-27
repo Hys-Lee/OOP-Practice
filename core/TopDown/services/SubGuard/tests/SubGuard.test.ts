@@ -21,8 +21,7 @@ describe('TypeGuard 객체 테스트', () => {
 
 describe('LenGuard 객체 테스트', () => {
   const inputLen = 5;
-  const config = new DefaultGameConfigDTO(1, inputLen);
-  const lg = new LenGuard(config);
+  const lg = new LenGuard();
   const typePitchingDTOguard = new TypePitchingDTOGuard();
   const identityPitchingDTOguard = new IdentityNumberPitchingDTOGuard();
   test('validate테스트 - VALID: 입력 길이 체크', () => {
@@ -31,7 +30,7 @@ describe('LenGuard 객체 테스트', () => {
       typePitchingDTOguard,
       identityPitchingDTOguard
     );
-    expect(lg.validate(input)).toEqual({ type: 'len', result: true });
+    expect(lg.validate(input, inputLen)).toEqual({ type: 'len', result: true });
   });
   test('validate테스트 - INVALID: 입력 길이 체크', () => {
     const input = PitchingDTOFactory.createPitchingDTO(
@@ -39,12 +38,27 @@ describe('LenGuard 객체 테스트', () => {
       typePitchingDTOguard,
       identityPitchingDTOguard
     );
-    expect(lg.validate(input)).toEqual({ type: 'len', result: false });
+    expect(lg.validate(input, inputLen)).toEqual({
+      type: 'len',
+      result: false,
+    });
   });
 });
 
 describe('PhaseGuard 객체 테스트', () => {
-  const phase = 3;
-  const config = new DefaultGameConfigDTO(phase, 0);
-  const pg = new PhaseGuard(config);
+  const answerPhase = 3;
+  // const config = new DefaultGameConfigDTO(phase, 0);
+  const pg = new PhaseGuard();
+  test('validate테스트 - Valid', () => {
+    expect(pg.validate(answerPhase, 3)).toEqual({
+      type: 'phase',
+      result: true,
+    });
+  });
+  test('validation테스트 - Invalid', () => {
+    expect(pg.validate(answerPhase, 4)).toEqual({
+      type: 'phase',
+      result: false,
+    });
+  });
 });

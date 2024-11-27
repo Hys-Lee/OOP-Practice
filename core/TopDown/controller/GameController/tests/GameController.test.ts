@@ -54,18 +54,21 @@ describe('게임 컨트롤러 테스트', () => {
     );
   });
 
-  test('proceed 테스트 - Invalid proceed에러 처리 - 페이즈 Error', () => {
-    const mockGame = new ThreePhaseGame();
+  /**
+   * 이 부분은 phaseGuard랑 하는일이 겹쳐서 제외.
+   */
+  //   test('proceed 테스트 - Invalid proceed에러 처리 - 페이즈 Error', () => {
+  //     const mockGame = new ThreePhaseGame();
 
-    const gameController = new DefaultGameController(mockGame);
-    expect(() => {
-      for (let i = 0; i < 4; i++) {
-        gameController.proceed([1, 2, 3]);
-      }
-    }).toThrow(
-      new GameErrorDTO(['마지막 페이즈였습니다'], '부적절한 게임 입력')
-    );
-  });
+  //     const gameController = new DefaultGameController(mockGame);
+  //     expect(() => {
+  //       for (let i = 0; i < 4; i++) {
+  //         gameController.proceed([1, 2, 3]);
+  //       }
+  //     }).toThrow(
+  //       new GameErrorDTO(['마지막 페이즈였습니다'], '부적절한 게임 입력')
+  //     );
+  //   });    =
 
   test('proceed 테스트 - Valid proceed 반환', () => {
     const mockGame = new ThreePhaseGame();

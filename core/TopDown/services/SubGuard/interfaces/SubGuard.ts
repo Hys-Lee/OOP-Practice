@@ -4,9 +4,12 @@ import { SubGuardResult } from '../../DataTypes';
 interface SubGuardForInput {
   validate: (input: PitchingDTO) => SubGuardResult;
 }
+interface SubGuardForInputAndNumber {
+  validate: (input: PitchingDTO, number: number) => SubGuardResult;
+}
 interface SubGuardForNumber {
-  validate: (input: number) => SubGuardResult;
+  validate: (answer: number, input: number) => SubGuardResult;
 }
 // type SubGuard = SubGuardForInput | SubGuardForNumber;
 
-export { SubGuardForInput, SubGuardForNumber };
+export { SubGuardForInput, SubGuardForInputAndNumber, SubGuardForNumber };

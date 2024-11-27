@@ -24,8 +24,13 @@ class NumberBaseballGame implements Game {
     this.answer = answer;
   }
 
-  private _validate(input: PitchingDTO) {
-    const invalidTypes: string[] = this.guard.validate(input, this.config);
+  private _validate(input: PitchingDTO, curPhase: number) {
+    const invalidTypes: string[] = this.guard.validate(
+      input,
+      this.config.dataLen,
+      this.config.phase,
+      curPhase
+    );
 
     if (invalidTypes.length > 0) {
       throw new GameErrorDTO(invalidTypes);
@@ -35,8 +40,8 @@ class NumberBaseballGame implements Game {
     return this.referee.judge(input, this.answer);
   }
 
-  proceed(input: PitchingDTO) {
-    this._validate(input);
+  proceed(input: PitchingDTO, curPhase: number) {
+    this._validate(input, curPhase);
 
     const result = this._judge(input);
 
