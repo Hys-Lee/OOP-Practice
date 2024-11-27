@@ -46,9 +46,11 @@ describe('Guard테스트', () => {
       tmpPhase
     );
 
-    expect(() => {
-      g.validate(tmpInput, tmpConfig);
-    }).toThrow(new GameErrorDTO(['type', 'len', 'phase']));
+    const answer = ['len', 'type', 'phase'];
+
+    expect(g.validate(tmpInput, tmpConfig)).toEqual(
+      expect.arrayContaining(answer)
+    );
   });
 
   test('모두 괜찮을 때', () => {
@@ -58,9 +60,7 @@ describe('Guard테스트', () => {
       new PhaseGuard(false),
       tmpPhase
     );
-
-    expect(() => {
-      g.validate(tmpInput, tmpConfig);
-    }).not.toThrow();
+    const answer = [];
+    expect(g.validate(tmpInput, tmpConfig)).toEqual(answer);
   });
 });

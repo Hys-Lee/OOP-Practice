@@ -4,8 +4,8 @@ interface ErrorDTO {
 
 class GameErrorDTO extends Error implements ErrorDTO {
   private _reasons: string[];
-  constructor(reasons: string[]) {
-    super();
+  constructor(reasons: string[], message?: string) {
+    super(message);
     this._reasons = reasons;
   }
   get reasons() {

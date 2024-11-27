@@ -1,3 +1,4 @@
+type GuardResult = ('type' | 'len' | 'phase')[];
 interface SubGuardResult {
   type: string;
   result: boolean;
@@ -11,4 +12,4 @@ interface PitchingResult {
   ball: number;
 }
 
-export { SubGuardResult, SubRefereeResult, PitchingResult };
+export { GuardResult, SubGuardResult, SubRefereeResult, PitchingResult };

@@ -31,11 +31,11 @@ class Guard1 {
       this._phaseGuard.validate(this._curPhase),
     ];
 
-    const invalidTypes = validationRes.filter((res) => !res.result);
-    if (invalidTypes.length > 0) {
-      const reasons = invalidTypes.map(({ type }) => type);
-      throw new GameErrorDTO(reasons);
-    }
+    const invalidTypes = validationRes
+      .filter((res) => !res.result)
+      .map((subGuardRes) => subGuardRes.type);
+
+    return invalidTypes;
   }
 }
 export default Guard1;

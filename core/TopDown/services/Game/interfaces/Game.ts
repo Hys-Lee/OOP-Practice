@@ -1,6 +1,7 @@
-import GameResultDTO from '../../../model/Game/GameResultDTO';
-
+import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
+import { PitchingResult } from '../../DataTypes';
 interface Game {
-  proceed: (input: any) => GameResultDTO;
+  proceed: (input: PitchingDTO) => PitchingResult;
+  getConfigPhase: () => number;
 }
 export { Game };

@@ -1,7 +1,20 @@
 import PitchingDTOFactory from '../../../model/PitchingDTO/PitchingDTOFactory';
+import {
+  IdentityNumberPitchingDTOGuard,
+  TypePitchingDTOGuard,
+  PitchingDTOGuard,
+} from '../../../model/PitchingDTO/PitchingDTOGuard';
 
 class RandomAnswerMaker {
-  constructor() {}
+  private typePitchingDTOGuard: PitchingDTOGuard;
+  private identityPitchingDTOGuard: PitchingDTOGuard;
+  constructor(
+    typePitchingDTOGuard: PitchingDTOGuard,
+    identityPitchingDTOGuard: PitchingDTOGuard
+  ) {
+    this.typePitchingDTOGuard = typePitchingDTOGuard;
+    this.identityPitchingDTOGuard = identityPitchingDTOGuard;
+  }
 
   makeUniqueRandom(accumulatedNumbers: number[]) {
     const makeRandom = () => Math.round(Math.random() * 9);
@@ -18,7 +31,11 @@ class RandomAnswerMaker {
       answer.push(this.makeUniqueRandom(answer));
     }
 
-    return PitchingDTOFactory.createPitchingDTO(answer);
+    return PitchingDTOFactory.createPitchingDTO(
+      answer,
+      this.typePitchingDTOGuard,
+      this.identityPitchingDTOGuard
+    );
   }
 }
 

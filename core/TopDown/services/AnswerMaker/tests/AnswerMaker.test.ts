@@ -1,7 +1,16 @@
+import {
+  IdentityNumberPitchingDTOGuard,
+  TypePitchingDTOGuard,
+} from '../../../model/PitchingDTO/PitchingDTOGuard';
 import RandomAnswerMaker from '../classes/RandomAnswerMaker';
 
 describe('AnswerMaker 테스트', () => {
-  const ram = new RandomAnswerMaker();
+  const typePitchingDTOGuard = new TypePitchingDTOGuard();
+  const identityPitchingDTOGuard = new IdentityNumberPitchingDTOGuard();
+  const ram = new RandomAnswerMaker(
+    typePitchingDTOGuard,
+    identityPitchingDTOGuard
+  );
   test('4자리 answer의 unique 테스트', () => {
     const answer = ram.makeAnswer(4);
 

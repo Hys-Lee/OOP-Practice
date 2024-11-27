@@ -2,10 +2,15 @@ import PitchingDTO from './PithcingDTO';
 import {
   TypePitchingDTOGuard,
   IdentityNumberPitchingDTOGuard,
+  PitchingDTOGuard,
 } from './PitchingDTOGuard';
 
 class PitchingDTOFactory {
-  static _validate(input: any, typeGuard, identityGuard) {
+  static _validate(
+    input: any,
+    typeGuard: PitchingDTOGuard,
+    identityGuard: PitchingDTOGuard
+  ) {
     if (!typeGuard.validate(input)) {
       throw new Error('DTO 생성 실패');
     }
@@ -16,8 +21,8 @@ class PitchingDTOFactory {
   }
   static createPitchingDTO(
     input: any,
-    typeGuard = new TypePitchingDTOGuard(),
-    identityGuard = new IdentityNumberPitchingDTOGuard()
+    typeGuard: PitchingDTOGuard, // = new TypePitchingDTOGuard(),
+    identityGuard: PitchingDTOGuard // = new IdentityNumberPitchingDTOGuard()
   ) {
     this._validate(input, typeGuard, identityGuard);
 

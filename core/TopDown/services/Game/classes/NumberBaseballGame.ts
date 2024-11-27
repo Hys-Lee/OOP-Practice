@@ -1,19 +1,16 @@
 import { GameConfigDTO } from '../../../model/ConfigDTO/GameConfigDTO';
 import PitchingDTO from '../../../model/PitchingDTO/PithcingDTO';
-import RandomAnswerMaker from '../../AnswerMaker/classes/RandomAnswerMaker';
-import Guard1 from '../../Guard/classes/Guard1';
 import { Guard } from '../../Guard/interfaces/Guard';
 import { Referee } from '../../Referee/interfaces/Referee';
+import { SubGuardResult } from '../../DataTypes';
+import { GameErrorDTO } from '../../../model/ErrorDTO/ErrorDTO';
+import { Game } from '../interfaces/Game';
 
-const DEFAULT_GAME_PHASE = 10;
-const DEFAULT_GAME_LEN = 3;
-
-class Game1 {
+class NumberBaseballGame implements Game {
   private config: GameConfigDTO;
   private guard: Guard;
   private referee: Referee;
   private answer: PitchingDTO;
-  private curPhase: number;
 
   constructor(
     config: GameConfigDTO,
@@ -25,16 +22,29 @@ class Game1 {
     this.guard = guard;
     this.referee = referee;
     this.answer = answer;
-    this.curPhase = 0;
   }
 
   private _validate(input: PitchingDTO) {
-    this.guard.validate(input, this.config);
+    const invalidTypes: string[] = this.guard.validate(input, this.config);
+
+    if (invalidTypes.length > 0) {
+      throw new GameErrorDTO(invalidTypes);
+    }
   }
-  private _judge() {}
+  private _judge(input: PitchingDTO) {
+    return this.referee.judge(input, this.answer);
+  }
 
   proceed(input: PitchingDTO) {
     this._validate(input);
-    this._judge();
+
+    const result = this._judge(input);
+
+    return result;
+  }
+  getConfigPhase() {
+    return this.config.phase;
   }
 }
+
+export default NumberBaseballGame;

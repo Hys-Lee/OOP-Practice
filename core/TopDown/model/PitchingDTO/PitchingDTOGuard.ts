@@ -13,18 +13,23 @@ class TypePitchingDTOGuard implements PitchingDTOGuard {
 }
 
 class IdentityNumberPitchingDTOGuard implements PitchingDTOGuard {
-  private identitySet: Set<number>;
-  constructor() {
-    this.identitySet = new Set();
-  }
+  constructor() {}
   validate(input: number[]) {
-    return input.every((value) => {
-      if (this.identitySet.has(value)) return false;
+    const identitySet = new Set();
+    const result = input.every((value) => {
+      if (identitySet.has(value)) return false;
 
-      this.identitySet.add(value);
+      identitySet.add(value);
+
       return true;
     });
+
+    return result;
   }
 }
 
-export { TypePitchingDTOGuard, IdentityNumberPitchingDTOGuard };
+export {
+  PitchingDTOGuard,
+  TypePitchingDTOGuard,
+  IdentityNumberPitchingDTOGuard,
+};

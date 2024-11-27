@@ -1,15 +1,15 @@
 class GameResultDTO {
-  private _curPhase;
+  private _leftPhase;
   private _isEnd;
   private _pitchingResult;
-  constructor({ curPhase, isEnd, pitchingResult }) {
-    this._curPhase = curPhase;
+  constructor({ leftPhase, isEnd, pitchingResult }) {
+    this._leftPhase = leftPhase;
     this._isEnd = isEnd;
     this._pitchingResult = pitchingResult;
   }
   get pitchingResult() {
     return {
-      curPhase: this._curPhase,
+      leftPhase: this._leftPhase,
       isEnd: this._isEnd,
       pitchingResult: this._pitchingResult,
     };
