@@ -1,3 +1,10 @@
+import { PitchingResult } from '../../services/DataTypes';
+
+interface GameResult {
+  leftPhase: number;
+  isEnd: boolean;
+  pitchingResult: PitchingResult;
+}
 class GameResultDTO {
   private _leftPhase;
   private _isEnd;
