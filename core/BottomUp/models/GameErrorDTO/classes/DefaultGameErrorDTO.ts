@@ -1,6 +1,7 @@
 import { ValidationError } from '../../ValidationError/interfaces/ValidationError';
+import { GameErrorDTO } from '../interfaces/GameErrorDTO';
 
-class DefaultGameErrorDTO {
+class DefaultGameErrorDTO implements GameErrorDTO {
   private _continuable: boolean;
   private _detail: ValidationError;
 

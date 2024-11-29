@@ -1,4 +1,6 @@
-class DefaultGameConfigDTO {
+import { GameConfigDTO } from '../interfaces/GameConfigDTO';
+
+class DefaultGameConfigDTO implements GameConfigDTO {
   private _phase: number;
   private _dataLen: number;
   constructor(phase: number, dataLen: number) {

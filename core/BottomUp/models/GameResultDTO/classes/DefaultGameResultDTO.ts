@@ -1,6 +1,7 @@
 import { JudgeResult } from '../../JudgeResult/interfaces/JudgeResult';
+import { GameResultDTO } from '../interfaces/GameResultDTO';
 
-class DefaultGameResultDTO {
+class DefaultGameResultDTO implements GameResultDTO {
   private _isSuccess: boolean;
   private _detailResult: JudgeResult;
   private _remainPhase: number;

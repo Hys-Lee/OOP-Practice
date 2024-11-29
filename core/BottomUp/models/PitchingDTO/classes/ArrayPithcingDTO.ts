@@ -1,4 +1,6 @@
-class ArrayPitchingDTO {
+import { PitchingDTO } from '../interfaces/PitchingDTO';
+
+class ArrayPitchingDTO implements PitchingDTO {
   private _pithingData: number[];
   constructor(pitchingData: number[]) {
     this._pithingData = pitchingData;
