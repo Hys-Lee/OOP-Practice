@@ -1,5 +1,5 @@
-import BallReferee from '../../../../TopDown/services/SubReferee/classes/BallReferee';
-import StrikeReferee from '../../../../TopDown/services/SubReferee/classes/StrikeReferee';
+import { StrikeReferee } from '../StrikeReferee/interfaces/StrikeReferee';
+import { BallReferee } from '../BallRefree/interfaces/BallReferee';
 
 type SubReferee = StrikeReferee | BallReferee;
 
