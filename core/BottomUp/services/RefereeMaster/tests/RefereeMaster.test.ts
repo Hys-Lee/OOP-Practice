@@ -22,15 +22,16 @@ describe('마스터 심판 테스트', () => {
     mockRefereeJudge(mockedStrikeReferee, { strike: 3 });
     const mockedBallReferee = new DefaultBallReferee();
     mockRefereeJudge(mockedBallReferee, { ball: 0 });
+    const dataLen = 3;
 
     const conclusion = rm.result(
       meaningLessInput,
       meaningLessAnswer,
       [mockedStrikeReferee],
-      [DefaultStrikeReferee],
       [mockedBallReferee],
-      [DefaultBallReferee]
+      dataLen
     );
+
     expect(conclusion).toEqual({
       detailResult: {
         strike: 3,
@@ -44,15 +45,16 @@ describe('마스터 심판 테스트', () => {
     mockRefereeJudge(mockedStrikeReferee, { strike: 1 });
     const mockedBallReferee = new DefaultBallReferee();
     mockRefereeJudge(mockedBallReferee, { ball: 3 });
+    const dataLen = 4;
 
     const conclusion = rm.result(
       meaningLessInput,
       meaningLessAnswer,
       [mockedStrikeReferee],
-      [DefaultStrikeReferee],
       [mockedBallReferee],
-      [DefaultBallReferee]
+      dataLen
     );
+
     expect(conclusion).toEqual({
       detailResult: {
         strike: 1,

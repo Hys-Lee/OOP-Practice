@@ -9,9 +9,8 @@ interface RefereeMasters {
     input: PitchingDTO,
     answer: PitchingDTO,
     determinateSubReferees: SubReferee[],
-    determinateRefereeClasses: (new () => SubReferee)[],
     indeterminateSubReferees: SubReferee[],
-    indeterminateRefereeClasses: (new () => SubReferee)[]
+    dataLen: number
   ) => JudgeConclusion;
 }
 
