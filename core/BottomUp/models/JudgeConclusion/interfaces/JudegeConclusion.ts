@@ -1,4 +1,4 @@
-import { JudgeResult } from '../../JudgeResult/interfaces/JudgeResult';
+import { JudgeResult } from '../../JudgeResult/types/JudgeResult';
 interface JudgeConclusion {
   isSuccess: boolean;
   detailResult: JudgeResult;

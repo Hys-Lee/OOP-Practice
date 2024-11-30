@@ -1,7 +1,7 @@
 import { PitchingDTO } from '../../../models/PitchingDTO/interfaces/PitchingDTO';
 import SubReferee from '../../SubReferee/types/SubReferee';
 import { RefereeMasters } from '../interfaces/RefereeMaster';
-import { JudgeResult } from '../../../models/JudgeResult/interfaces/JudgeResult';
+import { JudgeResult } from '../../../models/JudgeResult/types/JudgeResult';
 
 class DistinguisingRefereeMaster implements RefereeMasters {
   constructor() {}

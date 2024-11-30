@@ -1,4 +1,4 @@
-import { JudgeResult } from '../../JudgeResult/interfaces/JudgeResult';
+import { JudgeResult } from '../../JudgeResult/types/JudgeResult';
 import { GameResultDTO } from '../interfaces/GameResultDTO';
 
 class DefaultGameResultDTO implements GameResultDTO {

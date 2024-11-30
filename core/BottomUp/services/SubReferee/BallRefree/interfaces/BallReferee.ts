@@ -1,4 +1,4 @@
-import { JudgeResult } from '../../../../models/JudgeResult/interfaces/JudgeResult';
+import { JudgeResult } from '../../../../models/JudgeResult/types/JudgeResult';
 import { PitchingDTO } from '../../../../models/PitchingDTO/interfaces/PitchingDTO';
 
 interface BallReferee {

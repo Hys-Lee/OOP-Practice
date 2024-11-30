@@ -1,4 +1,4 @@
-import { JudgeResult } from '../../../models/JudgeResult/interfaces/JudgeResult';
+import { JudgeResult } from '../../../models/JudgeResult/types/JudgeResult';
 import ArrayPitchingDTO from '../../../models/PitchingDTO/classes/ArrayPithcingDTO';
 import DefaultBallReferee from '../../SubReferee/BallRefree/classes/DefaultBallReferee';
 import DefaultStrikeReferee from '../../SubReferee/StrikeReferee/classes/DefaultStrikeReferee';
@@ -36,7 +36,7 @@ describe('마스터 심판 테스트', () => {
       detailResult: {
         strike: 3,
         ball: 0,
-      },
+      } as JudgeResult,
       isSuccess: true,
     });
   });
@@ -59,7 +59,7 @@ describe('마스터 심판 테스트', () => {
       detailResult: {
         strike: 1,
         ball: 3,
-      },
+      } as JudgeResult,
       isSuccess: false,
     });
   });
