@@ -10,7 +10,6 @@ jest.mock('../../SubReferee/StrikeReferee/classes/DefaultStrikeReferee');
 jest.mock('../../SubReferee/BallRefree/classes/DefaultBallReferee');
 
 describe('마스터 심판 테스트', () => {
-  const rm = new DistinguisingRefereeMaster();
   const meaningLessInput = new ArrayPitchingDTO([]);
   const meaningLessAnswer = new ArrayPitchingDTO([]);
   const mockRefereeJudge = (referee: SubReferee, judgeResult: JudgeResult) => {
@@ -22,13 +21,17 @@ describe('마스터 심판 테스트', () => {
     mockRefereeJudge(mockedStrikeReferee, { strike: 3 });
     const mockedBallReferee = new DefaultBallReferee();
     mockRefereeJudge(mockedBallReferee, { ball: 0 });
+
+    const rm = new DistinguisingRefereeMaster(
+      [mockedStrikeReferee],
+      [mockedBallReferee]
+    );
     const dataLen = 3;
 
     const conclusion = rm.result(
       meaningLessInput,
       meaningLessAnswer,
-      [mockedStrikeReferee],
-      [mockedBallReferee],
+
       dataLen
     );
 
@@ -45,15 +48,14 @@ describe('마스터 심판 테스트', () => {
     mockRefereeJudge(mockedStrikeReferee, { strike: 1 });
     const mockedBallReferee = new DefaultBallReferee();
     mockRefereeJudge(mockedBallReferee, { ball: 3 });
+
+    const rm = new DistinguisingRefereeMaster(
+      [mockedStrikeReferee],
+      [mockedBallReferee]
+    );
     const dataLen = 4;
 
-    const conclusion = rm.result(
-      meaningLessInput,
-      meaningLessAnswer,
-      [mockedStrikeReferee],
-      [mockedBallReferee],
-      dataLen
-    );
+    const conclusion = rm.result(meaningLessInput, meaningLessAnswer, dataLen);
 
     expect(conclusion).toEqual({
       detailResult: {

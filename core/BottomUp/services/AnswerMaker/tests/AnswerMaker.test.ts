@@ -13,4 +13,13 @@ describe('AnswerMaker 테스트', () => {
     });
     expect(result).toBe(true);
   });
+  test('RandomAnswerMaker의 정수 배열 반호나 테스트', () => {
+    const am = new RandomAnswerMaker();
+    const fourLenInteger = am.makeAnswer(4);
+    const isAllInteger = fourLenInteger.pitchingData.every(
+      (value) => Number.isInteger(value) && !Number.isNaN(value)
+    );
+
+    expect(isAllInteger).toBe(true);
+  });
 });

@@ -8,8 +8,6 @@ interface RefereeMasters {
   result: (
     input: PitchingDTO,
     answer: PitchingDTO,
-    determinateSubReferees: SubReferee[],
-    indeterminateSubReferees: SubReferee[],
     dataLen: number
   ) => JudgeConclusion;
 }

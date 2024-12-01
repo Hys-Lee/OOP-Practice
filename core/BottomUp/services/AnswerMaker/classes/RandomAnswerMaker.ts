@@ -3,7 +3,7 @@ import { AnswerMaker } from '../interfaces/AnswerMaker';
 
 class RandomAnswerMaker implements AnswerMaker {
   private _uniquifyWithSet(answerSet: Set<number>) {
-    const makeRandomNum = () => Math.random() * 10;
+    const makeRandomNum = () => Math.floor(Math.random() * 10);
     let randNum = makeRandomNum();
     while (answerSet.has(randNum) || randNum === 10) {
       randNum = makeRandomNum();

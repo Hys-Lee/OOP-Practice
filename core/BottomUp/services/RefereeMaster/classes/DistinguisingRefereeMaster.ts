@@ -4,7 +4,15 @@ import { RefereeMasters } from '../interfaces/RefereeMaster';
 import { JudgeResult } from '../../../models/JudgeResult/types/JudgeResult';
 
 class DistinguisingRefereeMaster implements RefereeMasters {
-  constructor() {}
+  private determinateSubReferees: SubReferee[];
+  private indeterminateSubReferees: SubReferee[];
+  constructor(
+    determinateSubReferees: SubReferee[],
+    indeterminateSubReferees: SubReferee[]
+  ) {
+    this.determinateSubReferees = determinateSubReferees;
+    this.indeterminateSubReferees = indeterminateSubReferees;
+  }
 
   // judgeHandling
   private _judgeForSubReferee(
@@ -36,17 +44,11 @@ class DistinguisingRefereeMaster implements RefereeMasters {
     return { isSuccess };
   }
 
-  result(
-    input: PitchingDTO,
-    answer: PitchingDTO,
-    determinateSubReferees: SubReferee[],
-    indeterminateSubReferees: SubReferee[],
-    dataLen: number
-  ) {
+  result(input: PitchingDTO, answer: PitchingDTO, dataLen: number) {
     const determinateResults: JudgeResult = this._judgeForSubReferee(
       input,
       answer,
-      determinateSubReferees
+      this.determinateSubReferees
     );
 
     const determinateConclusion = this._concludeDeterminates(
@@ -57,7 +59,7 @@ class DistinguisingRefereeMaster implements RefereeMasters {
     const indeterminateResults: JudgeResult = this._judgeForSubReferee(
       input,
       answer,
-      indeterminateSubReferees
+      this.indeterminateSubReferees
     );
 
     return {
